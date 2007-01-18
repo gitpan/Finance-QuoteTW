@@ -1,0 +1,6 @@
+Revision history for Perl extension Finance::QuoteTW.
+
+0.01  Thu Jan 18 21:43:58 2007
+	- original version; created by h2xs 1.23 with options
+		-X -n Finance::QuoteTW -v 0.01
+

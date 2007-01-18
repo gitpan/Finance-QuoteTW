@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="17"
+   name=""
+   committed-date="2007-01-18T14:43:48.103926Z"
+   url="file:///home/alec/svn/Finance"
+   last-author="alec"
+   kind="dir"
+   uuid="5ef2ff75-1627-0410-ae32-c114968fbd18"
+   repos="file:///home/alec/svn/Finance"
+   revision="17"/>
+<entry
+   committed-rev="17"
+   name="QuoteTW.pm"
+   text-time="2007-01-18T14:32:26.000000Z"
+   committed-date="2007-01-18T14:43:48.103926Z"
+   checksum="09fca9c5d760cb44c659411502f49f49"
+   last-author="alec"
+   kind="file"/>
+<entry
+   name="QuoteTW"
+   kind="dir"/>
+</wc-entries>
