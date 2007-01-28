@@ -12,67 +12,76 @@
    repos="file:///home/alec/svn/Finance"
    revision="17"/>
 <entry
-   committed-rev="17"
+   committed-rev="18"
    name="Franklin.pm"
-   text-time="2007-01-18T14:40:42.000000Z"
-   committed-date="2007-01-18T14:43:48.103926Z"
-   checksum="bfe6cbc6d296f619db62d2824e6f684a"
+   text-time="2007-01-28T16:22:29.000000Z"
+   committed-date="2007-01-28T16:22:54.171131Z"
+   checksum="d04737157d06dbf2c3321a8f7de7e334"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"
+   revision="18"/>
 <entry
    committed-rev="17"
    name="Iit.pm"
-   text-time="2007-01-18T14:41:19.000000Z"
+   text-time="2007-01-28T16:20:42.000000Z"
    committed-date="2007-01-18T14:43:48.103926Z"
    checksum="fa5044ba363e89207c0395edcd40e203"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"/>
 <entry
    committed-rev="17"
    name="Jfrich.pm"
-   text-time="2007-01-18T14:41:49.000000Z"
+   text-time="2007-01-28T16:20:42.000000Z"
    committed-date="2007-01-18T14:43:48.103926Z"
    checksum="d17de96c3c5ac499bb9f529814ac7a07"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"/>
 <entry
    committed-rev="17"
    name="Cathay.pm"
-   text-time="2007-01-18T14:39:50.000000Z"
+   text-time="2007-01-28T16:20:42.000000Z"
    committed-date="2007-01-18T14:43:48.103926Z"
    checksum="a61eca17dffae396cda4fdf628db8689"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"/>
 <entry
    committed-rev="17"
    name="Blackrock.pm"
-   text-time="2007-01-18T14:36:56.000000Z"
+   text-time="2007-01-28T16:20:42.000000Z"
    committed-date="2007-01-18T14:43:48.103926Z"
    checksum="e6c8c0ed02dbd3d3e2d7296b4d40b56e"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"/>
 <entry
    committed-rev="17"
    name="Schroders.pm"
-   text-time="2007-01-18T14:42:30.000000Z"
+   text-time="2007-01-28T16:20:42.000000Z"
    committed-date="2007-01-18T14:43:48.103926Z"
    checksum="a2932accf7425283f92441c41da5481b"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"/>
 <entry
    committed-rev="17"
    name="Capital.pm"
-   text-time="2007-01-18T14:39:02.000000Z"
+   text-time="2007-01-28T16:20:42.000000Z"
    committed-date="2007-01-18T14:43:48.103926Z"
    checksum="1bb60eb1d4280eca23deda98c38cdabc"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"/>
 <entry
    committed-rev="17"
    name="Tisc.pm"
-   text-time="2007-01-18T14:43:02.000000Z"
+   text-time="2007-01-28T16:20:42.000000Z"
    committed-date="2007-01-18T14:43:48.103926Z"
    checksum="3a26ec2920b4a2fd42ee60ab13948539"
    last-author="alec"
-   kind="file"/>
+   kind="file"
+   prop-time="2007-01-28T16:20:42.000000Z"/>
 </wc-entries>

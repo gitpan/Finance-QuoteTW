@@ -2,5 +2,14 @@ Changes
 Makefile.PL
 MANIFEST
 README
+test.pl
 t/Finance-QuoteTW.t
 lib/Finance/QuoteTW.pm
+lib/Finance/QuoteTW/Blackrock.pm
+lib/Finance/QuoteTW/Capital.pm
+lib/Finance/QuoteTW/Cathay.pm
+lib/Finance/QuoteTW/Franklin.pm
+lib/Finance/QuoteTW/Iit.pm
+lib/Finance/QuoteTW/Jfrich.pm
+lib/Finance/QuoteTW/Schroders.pm
+lib/Finance/QuoteTW/Tisc.pm

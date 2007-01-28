@@ -4,3 +4,5 @@ Revision history for Perl extension Finance::QuoteTW.
 	- original version; created by h2xs 1.23 with options
 		-X -n Finance::QuoteTW -v 0.01
 
+0.02  Mon Jan 29 00:27:58 2007
+	- modify Franklin.pm to make it work correctly

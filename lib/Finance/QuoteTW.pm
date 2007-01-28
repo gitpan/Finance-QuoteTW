@@ -5,7 +5,7 @@ use Spiffy -Base;
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 my @onshore = qw/capital cathay iit jfrich tisc/;
 my @offshore = qw/jfrich franklin schroders blackrock/;
@@ -57,7 +57,7 @@ __END__
 
 =head1 NAME
 
-Finance::QuoteTW - Fetch mutual fund quotes in Taiwan
+Finance::QuoteTW - Fetch quotes of mutual funds in Taiwan
 
 =head1 SYNOPSIS
 
@@ -66,7 +66,7 @@ Finance::QuoteTW - Fetch mutual fund quotes in Taiwan
 	$q = Finance::QuoteTW->new(encoding => 'utf8');  # The default encoding is big5
 	@tisc_fund = $q->fetch('tisc');                  # Fetch all fund quotes from www.tisc.com.tw
 	$tisc_fund = $q->fetch('tisc');                  # Do the same thing but get an array reference
-	@us_funds  = $q->fetch('blackrock', '美國.*金'); # Select funds with regex
+	@us_funds  = $q->fetch('blackrock', 'taiwan.*'); # Select funds with regex
 	%all_funds = $q->fetch_all;                      # Fetch all available fund quotes
 	%all_onshore_funds  = $q->fetch_all('onshore');  # Fetch all available onshore fund quotes
 	%all_offshore_funds = $q->fetch_all('offshore'); # Fetch all available offshore fund quotes
@@ -98,7 +98,7 @@ The return value is a hash of array. Every hash contains a single fund informati
 The attributes are: name, date, nav, change, type, currency
 
 	$q->fetch('tisc');
-	$q->fetch('blackrock', '美國.*金');
+	$q->fetch('blackrock', 'taiwan.*');
 
 =head2 fetch_all
 

@@ -4,12 +4,13 @@ use WWW::Mechanize;
 use HTML::TableExtract;
 use Encode qw/from_to/;
 use LWP::Charset qw(getCharset);
+use Data::Dumper;
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -21,12 +22,11 @@ sub fetch {
 	my $current_encoding = getCharset($response);
 	my $date = $1 if $b->content =~ /(\d+\/\d+\/\d+)/;
 
-	my $te = HTML::TableExtract->new;
+	my $te = HTML::TableExtract->new(depth => 3);
 	$te->parse($b->content);
-
 	my @result;
 	my @ts = $te->tables;
-	foreach my $index (qw/8 12 16/) {
+	foreach my $index (0..2) {
 		my @rows = $ts[$index]->rows;
 		shift @rows;
 
