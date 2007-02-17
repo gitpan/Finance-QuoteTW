@@ -9,7 +9,7 @@ use LWP::Charset qw(getCharset);
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -17,7 +17,7 @@ our $VERSION = 0.01;
 
 sub fetch {
 	my $b = WWW::Mechanize->new;
-	my $response = $b->get('http://www.iit.com.tw/NewWork/fund_xle.aspx');
+	my $response = $b->get('http://www.iit.com.tw/Iitweb/NAV/FundNAVCurrentDate.aspx');
 	my $current_encoding = getCharset($response);
 
 	my $te = HTML::TableExtract->new;
@@ -25,7 +25,7 @@ sub fetch {
 
 	my @ts = $te->tables;
 	my @result;
-	my @rows = $ts[2]->rows;
+	my @rows = $ts[1]->rows;
 	shift @rows;
 
 	foreach my $row (@rows) {

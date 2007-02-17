@@ -5,10 +5,10 @@ use Spiffy -Base;
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
-my @onshore = qw/capital cathay iit jfrich tisc/;
-my @offshore = qw/jfrich franklin schroders blackrock/;
+my @onshore = qw/capital cathay iit jpmrich tisc/;
+my @offshore = qw/jpmrich franklin schroders blackrock/;
 my @all = (@onshore, @offshore);
 
 #---------------------------------------------------------------------------

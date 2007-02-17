@@ -6,3 +6,7 @@ Revision history for Perl extension Finance::QuoteTW.
 
 0.02  Mon Jan 29 00:27:58 2007
 	- modify Franklin.pm to make it work correctly
+
+0.03  Sat Feb 17 23:56:58 2007
+	- rename Jfrich.pm to Jpmrich.pm
+	- modify fetching algorithm of Iit.pm

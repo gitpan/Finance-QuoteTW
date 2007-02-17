@@ -1,4 +1,4 @@
-package Finance::QuoteTW::Jfrich;
+package Finance::QuoteTW::Jpmrich;
 use Spiffy -Base;
 use WWW::Mechanize;
 use HTML::TableExtract;
@@ -19,11 +19,11 @@ sub fetch {
 	my $fund_type = shift || '';
 
 	my $b = WWW::Mechanize->new;
-	my $response = $b->get('http://www.jfrich.com.tw');
+	my $response = $b->get('http://www.jpmrich.com.tw');
 	my $current_encoding = getCharset($response) || 'big5';
 	$b->follow_link(n => 1);
 
-	my $url = "http://www.jfrich.com.tw/cgi-bin/jfonline/funds/fund_nav_detail.jsp?BV_SessionID=$1"
+	my $url = "http://www.jpmrich.com.tw/cgi-bin/jfonline/funds/fund_nav_detail.jsp?BV_SessionID=$1"
 	  if $b->content =~ /\?BV_SessionID=([^"]+)/;
 	$b->get($url);
 	my $year = ${[localtime]}[5] + 1900;
@@ -72,7 +72,7 @@ __END__
 
 =head1 NAME 
 
-Finance::QuoteTW::Jfrich - Get fund quotes from www.jfrich.com.tw
+Finance::QuoteTW::Jpmrich - Get fund quotes from www.jpmrich.com.tw
 
 =head1 SYNOPSIS
 
@@ -80,7 +80,7 @@ See L<Finance::QuoteTW>.
 
 =head1 DESCRIPTION
 
-Get fund quotes from www.jfrich.com.tw
+Get fund quotes from www.jpmrich.com.tw
 
 =head1 AUTHOR
 
