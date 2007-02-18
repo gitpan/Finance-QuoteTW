@@ -2,21 +2,23 @@ package Finance::QuoteTW::Jpmrich;
 use Spiffy -Base;
 use WWW::Mechanize;
 use HTML::TableExtract;
-use Encode qw/from_to/;
+use Encode qw/from_to encode decode/;
+use Encode::TW;
 use LWP::Charset qw(getCharset);
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 #---------------------------------------------------------------------------
 #  Methods
 #---------------------------------------------------------------------------
 
 sub fetch {
-	my $fund_type = shift || '';
+	my %args = @_;
+	my $fund_type = $args{type} || '';
 
 	my $b = WWW::Mechanize->new;
 	my $response = $b->get('http://www.jpmrich.com.tw');
@@ -52,7 +54,10 @@ sub fetch {
 					   map { split /\n/, $_ } @$row;
 			my $type = 'N/A';
 			my $currency = $data[1] =~ /([a-z]{3})/i ? $1 : 'TWD';
-			from_to($data[0], $current_encoding, $self->{encoding});
+
+			if ( $current_encoding ne $self->{encoding} ) {
+				from_to( $data[0], $current_encoding, $self->{encoding} );
+			}
 
 			push @result, {
 				name     => $data[0],

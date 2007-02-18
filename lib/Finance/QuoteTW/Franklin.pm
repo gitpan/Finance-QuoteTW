@@ -3,14 +3,14 @@ use Spiffy -Base;
 use WWW::Mechanize;
 use HTML::TableExtract;
 use Encode qw/from_to/;
+use Encode::TW;
 use LWP::Charset qw(getCharset);
-use Data::Dumper;
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 #---------------------------------------------------------------------------
 #  Methods
