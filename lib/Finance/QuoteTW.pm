@@ -6,93 +6,108 @@ use Carp;
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.04;
+our $VERSION = 0.05;
 
-my @onshore = qw/capital cathay iit jpmrich tisc/;
+my @onshore  = qw/capital cathay iit jpmrich tisc paradigm allianz/;
 my @offshore = qw/jpmrich franklin schroders blackrock/;
-my @all = (@onshore, @offshore);
+my @all      = ( @onshore, @offshore );
 
 #---------------------------------------------------------------------------
 #  Methods
 #---------------------------------------------------------------------------
 
 sub new() {
-	my $class = shift;
-	my %args = @_;
-	$args{encoding} ||= 'big5';
-	bless \%args, $class;
+    my $class = shift;
+    my %args  = @_;
+    $args{encoding} ||= 'big5';
+    return bless \%args, $class;
 }
 
 sub names {
-	my $type = shift || '';
-	return $type eq 'onshore'  ? @onshore  :
-		   $type eq 'offshore' ? @offshore :
-		   @all;
+    my $type = shift || q{};
+    return $type eq 'onshore'  ? @onshore
+        : $type  eq 'offshore' ? @offshore
+        : @all;
 }
 
 sub fetch {
-	my %args = @_;
-    my @all = $args{site} =~ /capital/i   ? $self->capital(%args)   :
-			  $args{site} =~ /cathay/i    ? $self->cathay(%args)    :
-			  $args{site} =~ /iit/i       ? $self->iit(%args)       :
-			  $args{site} =~ /jpmrich/i   ? $self->jpmrich(%args)   :
-			  $args{site} =~ /tisc/i      ? $self->tisc(%args)      :
-			  $args{site} =~ /franklin/i  ? $self->franklin(%args)  :
-			  $args{site} =~ /schroders/i ? $self->schroders(%args) :
-			  $args{site} =~ /blackrock/i ? $self->blackrock(%args) :
-			  croak "Invalid site: $args{site}\n";
-			  
-	my @result = $args{name} ? grep { $_->{name} =~ $args{name} } @all : @all;
-	return wantarray ? @result : \@result;
+    my %args = @_;
+    my @all  =
+          $args{site} =~ /capital/ixm   ? $self->capital(%args)
+        : $args{site} =~ /cathay/ixm    ? $self->cathay(%args)
+        : $args{site} =~ /iit/ixm       ? $self->iit(%args)
+        : $args{site} =~ /jpmrich/ixm   ? $self->jpmrich(%args)
+        : $args{site} =~ /tisc/ixm      ? $self->tisc(%args)
+        : $args{site} =~ /franklin/ixm  ? $self->franklin(%args)
+        : $args{site} =~ /schroders/ixm ? $self->schroders(%args)
+        : $args{site} =~ /blackrock/ixm ? $self->blackrock(%args)
+        : $args{site} =~ /paradigm/ixm  ? $self->paradigm(%args)
+        : $args{site} =~ /allianz/ixm   ? $self->allianz(%args)
+        : croak "Invalid site: $args{site}\n";
+
+    my @result = $args{name} ? grep { $_->{name} =~ $args{name} } @all : @all;
+    return wantarray ? @result : \@result;
 }
 
 sub fetch_all {
-	my $type = shift || '';
-	my @array = $type eq 'onshore'  ? @onshore  :
-				$type eq 'offshore' ? @offshore :
-				@all;
-	my %result = map { $_ => [ $self->fetch( site => $_, type => $type ) ] } @array;
-	return wantarray ? %result : \%result;
+    my $type = shift || q{};
+    my @array =
+          $type eq 'onshore'  ? @onshore
+        : $type eq 'offshore' ? @offshore
+        : @all;
+    my %result
+        = map { $_ => [ $self->fetch( site => $_, type => $type ) ] } @array;
+    return wantarray ? %result : \%result;
 }
 
-sub capital { 
-	require Finance::QuoteTW::Capital;
-	Finance::QuoteTW::Capital::fetch($self, @_) 
+sub allianz {
+    require Finance::QuoteTW::Allianz;
+    return Finance::QuoteTW::Allianz::fetch( $self, @_ );
 }
 
-sub cathay { 
-	require Finance::QuoteTW::Cathay;
-	Finance::QuoteTW::Cathay::fetch($self, @_) 
+sub paradigm {
+    require Finance::QuoteTW::Paradigm;
+    return Finance::QuoteTW::Paradigm::fetch( $self, @_ );
 }
 
-sub iit { 
-	require Finance::QuoteTW::Iit;
-	Finance::QuoteTW::Iit::fetch($self, @_) 
+sub capital {
+    require Finance::QuoteTW::Capital;
+    return Finance::QuoteTW::Capital::fetch( $self, @_ );
 }
 
-sub jpmrich { 
-	require Finance::QuoteTW::Jpmrich; 
-	Finance::QuoteTW::Jpmrich::fetch($self, @_) 
+sub cathay {
+    require Finance::QuoteTW::Cathay;
+    return Finance::QuoteTW::Cathay::fetch( $self, @_ );
 }
 
-sub tisc { 
-	require Finance::QuoteTW::Tisc;
-	Finance::QuoteTW::Tisc::fetch($self, @_) 
+sub iit {
+    require Finance::QuoteTW::Iit;
+    return Finance::QuoteTW::Iit::fetch( $self, @_ );
 }
 
-sub franklin { 
-	require Finance::QuoteTW::Franklin;
-	Finance::QuoteTW::Franklin::fetch($self, @_) 
+sub jpmrich {
+    require Finance::QuoteTW::Jpmrich;
+    return Finance::QuoteTW::Jpmrich::fetch( $self, @_ );
+}
+
+sub tisc {
+    require Finance::QuoteTW::Tisc;
+    return Finance::QuoteTW::Tisc::fetch( $self, @_ );
+}
+
+sub franklin {
+    require Finance::QuoteTW::Franklin;
+    return Finance::QuoteTW::Franklin::fetch( $self, @_ );
 }
 
 sub schroders {
-	require Finance::QuoteTW::Schroders;
-	Finance::QuoteTW::Schroders::fetch($self, @_) 
+    require Finance::QuoteTW::Schroders;
+    return Finance::QuoteTW::Schroders::fetch( $self, @_ );
 }
 
 sub blackrock {
-	require Finance::QuoteTW::Blackrock;
-	Finance::QuoteTW::Blackrock::fetch($self, @_) 
+    require Finance::QuoteTW::Blackrock;
+    return Finance::QuoteTW::Blackrock::fetch( $self, @_ );
 }
 
 __END__
