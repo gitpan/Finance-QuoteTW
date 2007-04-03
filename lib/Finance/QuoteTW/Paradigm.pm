@@ -10,7 +10,7 @@ use LWP::Charset qw(getCharset);
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -34,6 +34,8 @@ sub fetch {
 		from_to($data[0], $current_encoding, $self->{encoding});
 		(my $change) = $data[3] =~ /([-]?\d+(\.\d+)?)/;
 		my $date = [localtime]->[5] + 1900 . "/$data[1]";
+		$date =~ s/\W$//;
+		$data[2] =~ s/\W$//;
 
 		push @result, {
 			name     => $data[0],

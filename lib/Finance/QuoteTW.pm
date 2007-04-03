@@ -6,7 +6,7 @@ use Carp;
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.05;
+our $VERSION = 0.06;
 
 my @onshore  = qw/capital cathay iit jpmrich tisc paradigm allianz/;
 my @offshore = qw/jpmrich franklin schroders blackrock/;

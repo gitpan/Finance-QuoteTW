@@ -16,3 +16,6 @@ Revision history for Perl extension Finance::QuoteTW.
 
 0.05  Tue Apr 3  23:26:30 2007
         - Paradigm & Allianz were added
+
+0.06  Tue Apr 4  00:08:03 2007
+        - Paradigm was modified
