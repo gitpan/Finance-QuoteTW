@@ -1,0 +1,49 @@
+---
+name: Finance-QuoteTW
+version: 0.07
+author:
+  - 'Alec Chen <alec@cpan.org>'
+abstract: Fetch quotes of mutual funds in Taiwan
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Test::More: 0
+provides:
+  Finance::QuoteTW:
+    file: lib/Finance/QuoteTW.pm
+    version: 0.07
+  Finance::QuoteTW::Allianz:
+    file: lib/Finance/QuoteTW/Allianz.pm
+    version: 0.01
+  Finance::QuoteTW::Blackrock:
+    file: lib/Finance/QuoteTW/Blackrock.pm
+    version: 0.02
+  Finance::QuoteTW::Capital:
+    file: lib/Finance/QuoteTW/Capital.pm
+    version: 0.02
+  Finance::QuoteTW::Cathay:
+    file: lib/Finance/QuoteTW/Cathay.pm
+    version: 0.02
+  Finance::QuoteTW::Franklin:
+    file: lib/Finance/QuoteTW/Franklin.pm
+    version: 0.03
+  Finance::QuoteTW::Iit:
+    file: lib/Finance/QuoteTW/Iit.pm
+    version: 0.03
+  Finance::QuoteTW::Jpmrich:
+    file: lib/Finance/QuoteTW/Jpmrich.pm
+    version: 0.02
+  Finance::QuoteTW::Paradigm:
+    file: lib/Finance/QuoteTW/Paradigm.pm
+    version: 0.02
+  Finance::QuoteTW::Schroders:
+    file: lib/Finance/QuoteTW/Schroders.pm
+    version: 0.02
+  Finance::QuoteTW::Tisc:
+    file: lib/Finance/QuoteTW/Tisc.pm
+    version: 0.02
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
