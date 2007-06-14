@@ -1,5 +1,8 @@
 Revision history for Perl extension Finance::QuoteTW.
 
+0.08  Fri Jun 15 00:52:06 CST 2007
+	- add sign=> 1 in Build.PL
+
 0.07  Thu Jun 14 21:27:40 CST 2007
 	- ./Build dist with Module::Build
 	- add SIGNATURE
