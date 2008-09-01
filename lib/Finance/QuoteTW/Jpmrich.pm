@@ -4,13 +4,13 @@ use WWW::Mechanize;
 use HTML::TableExtract;
 use Encode qw/from_to encode decode/;
 use Encode::TW;
-use LWP::Charset qw(getCharset);
+use HTML::Encoding 'encoding_from_http_message';
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.02;
+use version; our $VERSION = qv('0.03');
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -18,11 +18,11 @@ our $VERSION = 0.02;
 
 sub fetch {
 	my %args = @_;
-	my $fund_type = $args{type} || '';
+	my $fund_type = $args{type} || q{};
 
 	my $b = WWW::Mechanize->new;
 	my $response = $b->get('http://www.jpmrich.com.tw');
-	my $current_encoding = getCharset($response) || 'big5';
+	my $current_encoding = encoding_from_http_message($response) || 'big5';
 	$b->follow_link(n => 1);
 
 	my $url = "http://www.jpmrich.com.tw/cgi-bin/jfonline/funds/fund_nav_detail.jsp?BV_SessionID=$1"
@@ -86,6 +86,12 @@ See L<Finance::QuoteTW>.
 =head1 DESCRIPTION
 
 Get fund quotes from www.jpmrich.com.tw
+
+=head1 FUNCTIONS
+
+=head2 fetch
+
+see L<Finance::QuoteTW>
 
 =head1 AUTHOR
 

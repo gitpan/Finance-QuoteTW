@@ -4,13 +4,13 @@ use WWW::Mechanize;
 use HTML::TableExtract;
 use Encode qw/from_to/;
 use Encode::TW;
-use LWP::Charset qw(getCharset);
+use HTML::Encoding 'encoding_from_http_message';
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.02;
+use version; our $VERSION = qv('0.03');
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -19,7 +19,7 @@ our $VERSION = 0.02;
 sub fetch {
 	my $b = WWW::Mechanize->new;
 	my $response = $b->get('http://www.paradigm-fund.com/location.asp?oversea=0');
-	my $current_encoding = getCharset($response);
+	my $current_encoding = encoding_from_http_message($response);
 
 	my $te = HTML::TableExtract->new;
 	$te->parse($b->content);
@@ -63,6 +63,12 @@ See L<Finance::QuoteTW>.
 =head1 DESCRIPTION
 
 Get fund quotes from www.paradigm-fund.com
+
+=head1 FUNCTIONS
+
+=head2 fetch
+
+see L<Finance::QuoteTW>
 
 =head1 AUTHOR
 

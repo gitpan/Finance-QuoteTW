@@ -4,13 +4,13 @@ use WWW::Mechanize;
 use HTML::TableExtract;
 use Encode qw/from_to/;
 use Encode::TW;
-use LWP::Charset qw(getCharset);
+use HTML::Encoding 'encoding_from_http_message';
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.02;
+use version; our $VERSION = qv('0.03');
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -18,33 +18,35 @@ our $VERSION = 0.02;
 
 sub fetch {
 	my $b = WWW::Mechanize->new;
-	my $response = $b->get('http://www.capitalfund.com.tw/jsp/fund08.jsp');
-	my $current_encoding = getCharset($response);
+	my $response = $b->get('https://www.capitalfund.com.tw/Capital_Frontend/Fund_Index.action');
+	my $current_encoding = encoding_from_http_message($response);
 
 	my $te = HTML::TableExtract->new;
 	$te->parse($b->content);
 
 	my @ts = $te->tables;
 	my @result;
-	my @rows = $ts[8]->rows;
-	shift @rows;
 
-	foreach my $row (@rows) {
-		next unless $row->[1];
-		my @data = map { s/\s+//g; $_ } @$row;
-		my $type = 'N/A';
-		from_to($data[0], $current_encoding, $self->{encoding});
-		$data[3] =~ s/\+//;
+    foreach my $index (1,5,9,13) {
+        my @rows = $ts[$index]->rows;
+        shift @rows;
+        shift @rows;
 
-		push @result, {
-			name     => $data[0],
-			date     => $data[1],
-			nav      => $data[2],
-			change   => $data[3],
-			currency => 'TWD',
-			type     => $type,
-		};
-	}
+        foreach my $row (@rows) {
+            my @data = map { s/\s+//g if defined $_; $_ } @$row;
+            from_to( $data[0], $current_encoding, $self->{encoding} );
+            my $date = join q{/}, $data[6] =~ /(\d{4})(\d{2})(\d{2})/;
+
+            push @result, {
+                name     => $data[0],
+                date     => $date,
+                nav      => $data[8],
+                change   => 'N/A',
+                currency => 'TWD',
+                type     => 'N/A',
+            };
+        }
+    }
 
 	return @result;
 }
@@ -62,6 +64,12 @@ See L<Finance::QuoteTW>.
 =head1 DESCRIPTION
 
 Get fund quotes from www.capitalfund.com.tw
+
+=head1 FUNCTIONS
+
+=head2 fetch
+
+see L<Finance::QuoteTW>
 
 =head1 AUTHOR
 

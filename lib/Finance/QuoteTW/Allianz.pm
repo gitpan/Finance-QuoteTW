@@ -4,13 +4,14 @@ use WWW::Mechanize;
 use HTML::TableExtract;
 use Encode qw/from_to/;
 use Encode::TW;
-use LWP::Charset qw(getCharset);
+use HTML::Encoding 'encoding_from_http_message';
+use Data::TreeDumper;
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.01;
+use version; our $VERSION = qv('0.02');
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -18,28 +19,27 @@ our $VERSION = 0.01;
 
 sub fetch {
 	my $b = WWW::Mechanize->new;
-	my $response = $b->get(
-		'http://www.allianzglobalinvestors.com.tw/frontend/' 
-	  . 'Taiwan_SITE/Chinese/Fund/Fund_Price/onshore/fundprice.csv'
-	);
-	my $current_encoding = 'big5';
-	my @content = split /\n+/, $b->content;
+	my $response = $b->get('http://www.allianzglobalinvestors.com.tw/Allianz_WebSite/Overview.htm');
+	my $current_encoding = encoding_from_http_message($response);
 	my @result;
 
-	foreach my $line (@content) {
-		my @data = map { s/\s+//g; $_ } split /,/, $line;
-		my $data_count = scalar @data;
-		next if $data_count != 6;
+	my $te = HTML::TableExtract->new;
+	$te->parse($b->content);
+    my @ts = $te->tables;
+    my @rows = $ts[16]->rows;
+    shift @rows;
 
+	foreach my $row (@rows) {
+		my @data = @{$row};
+        my ($nav, $date) = $data[12] =~ /(\d+\.\d+)\(([^)]+)/;
 		from_to($data[3], $current_encoding, $self->{encoding});
-		(my $nav) = $data[4] =~ /(\d+(\.\d+)?)/;
 
 		push @result, {
 			name     => $data[3],
-			date     => $data[5],
+			date     => $date,
 			nav      => $nav,
 			change   => 'N/A',
-			currency => 'TWD',
+			currency => $data[9],
 			type     => 'N/A',
 		};
 	}
@@ -60,6 +60,12 @@ See L<Finance::QuoteTW>.
 =head1 DESCRIPTION
 
 Get fund quotes from www.allianzglobalinvestors.com.tw
+
+=head1 FUNCTIONS
+
+=head2 fetch
+
+see L<Finance::QuoteTW>
 
 =head1 AUTHOR
 

@@ -1,5 +1,9 @@
 Revision history for Perl extension Finance::QuoteTW.
 
+0.09 2008年09月01日 23時13分29秒 CST
+    - delete useless Cathay.pm
+    - use HTML::Encoding instead of LWP::Charset 
+
 0.08  Fri Jun 15 00:52:06 CST 2007
 	- add sign=> 1 in Build.PL
 

@@ -6,9 +6,9 @@ use Carp;
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.08;
+use version; our $VERSION = qv('0.09');
 
-my @onshore  = qw/capital cathay iit jpmrich tisc paradigm allianz/;
+my @onshore  = qw/capital iit jpmrich tisc paradigm allianz/;
 my @offshore = qw/jpmrich franklin schroders blackrock/;
 my @all      = ( @onshore, @offshore );
 
@@ -34,7 +34,6 @@ sub fetch {
     my %args = @_;
     my @all =
         $args{site} =~ /capital/ixm   ? $self->_capital(%args)
-      : $args{site} =~ /cathay/ixm    ? $self->_cathay(%args)
       : $args{site} =~ /iit/ixm       ? $self->_iit(%args)
       : $args{site} =~ /jpmrich/ixm   ? $self->_jpmrich(%args)
       : $args{site} =~ /tisc/ixm      ? $self->_tisc(%args)
@@ -73,11 +72,6 @@ sub _paradigm {
 sub _capital {
     require Finance::QuoteTW::Capital;
     return Finance::QuoteTW::Capital::fetch( $self, @_ );
-}
-
-sub _cathay {
-    require Finance::QuoteTW::Cathay;
-    return Finance::QuoteTW::Cathay::fetch( $self, @_ );
 }
 
 sub _iit {

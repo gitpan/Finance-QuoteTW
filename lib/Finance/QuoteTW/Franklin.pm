@@ -4,13 +4,13 @@ use WWW::Mechanize;
 use HTML::TableExtract;
 use Encode qw/from_to/;
 use Encode::TW;
-use LWP::Charset qw(getCharset);
+use HTML::Encoding 'encoding_from_http_message';
 
 #---------------------------------------------------------------------------
 #  Variables
 #---------------------------------------------------------------------------
 
-our $VERSION = 0.03;
+use version; our $VERSION = qv('0.04');
 
 #---------------------------------------------------------------------------
 #  Methods
@@ -19,7 +19,7 @@ our $VERSION = 0.03;
 sub fetch {
 	my $b = WWW::Mechanize->new;
 	my $response = $b->get('http://www.franklin.com.tw/1.FundIntro/1.3FundNet.asp');
-	my $current_encoding = getCharset($response);
+	my $current_encoding = encoding_from_http_message($response);
 	my $date = $1 if $b->content =~ /(\d+\/\d+\/\d+)/;
 
 	my $te = HTML::TableExtract->new(depth => 3);
@@ -32,7 +32,7 @@ sub fetch {
 
 		foreach my $row (@rows) {
 			next unless $row->[3] =~ /\d+\.\d+/;
-			my @data = map { s/\s+//g; $_ } @$row;
+			my @data = map { s/\s+//g if defined $_; $_ } @$row;
 			from_to($data[0], $current_encoding, $self->{encoding});
 			$data[5] =~ s/\+//;
 			$data[5] =~ s/^-$/0/;
@@ -64,6 +64,12 @@ See L<Finance::QuoteTW>.
 =head1 DESCRIPTION
 
 Get fund quotes from www.franklin.com.tw
+
+=head1 FUNCTIONS
+
+=head2 fetch
+
+see L<Finance::QuoteTW>
 
 =head1 AUTHOR
 
